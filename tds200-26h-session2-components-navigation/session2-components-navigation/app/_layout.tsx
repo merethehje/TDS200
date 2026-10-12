@@ -1,30 +1,21 @@
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Drawer } from "expo-router/drawer";
+
+import { Stack } from "expo-router";
 import React from "react";
+
+//headerShown: false hides the outer stacks headline
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
-        <Drawer.Screen
-          name="index"
-          options={{ drawerItemStyle: { display: "none" } }}
-        />
-        <Drawer.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
-            drawerLabel: "Home",
-          }}
-        />
-        <Drawer.Screen
-          name="settingsScreen"
-          options={{
-            title: "Settings",
-            drawerLabel: "Settings",
-          }}
-        />
-      </Drawer>
-    </GestureHandlerRootView>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen
+        name="settingsScreen"
+        options={{
+          headerShown: true,
+          title: "Settings",
+        }}
+      />
+    </Stack>
   );
 }
