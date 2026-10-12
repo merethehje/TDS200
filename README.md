@@ -12,7 +12,9 @@
 ## How to run
 
 ```bash
-w
+cd session1-setup
+npm install
+npx expo start
 ```
 
 Press `i` to open iOS simulator, `a` for Android, or `w` for the browser.
