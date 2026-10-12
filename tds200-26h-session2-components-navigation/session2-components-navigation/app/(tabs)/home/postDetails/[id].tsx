@@ -2,6 +2,9 @@ import { View, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { getPostById } from "@/utils/dummyPostData";
+import Tag from "@/components/Tag";
+import Spacer from "@/components/Spacer";
+
 
 // useLocalSearchParams() reads the [id] segment from the URL.
 // When we navigate to /home/postDetails/p1, id will be "p1".
@@ -16,13 +19,24 @@ export default function PostDetailsScreen() {
       </View>
     );
   }
+  
+  const hashtags = post.hashtags
+    .split(/\s+/)
+    .filter(Boolean);
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.author}>By {post.author}</Text>
       <Text style={styles.description}>{post.description}</Text>
-      <Text style={styles.hashtags}>{post.hashtags}</Text>
+      <Spacer height={12} />
+
+      <View style={styles.tagsContainer}>
+        {hashtags?.map((hashtag) => (
+          <Tag key={hashtag} label={hashtag} />
+        ))}
+      </View>
     </View>
   );
 }
@@ -50,14 +64,14 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 16,
   },
-  hashtags: {
-    fontSize: 13,
-    color: "gray",
-  },
   error: {
     fontSize: 16,
     color: "red",
     textAlign: "center",
     marginTop: 40,
+  },
+  tagsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });
