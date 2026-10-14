@@ -15,6 +15,7 @@ import { PostData } from "@/utils/postData";
 import { getAllPosts } from "@/utils/dummyPostData";
 import Post from "@/components/Post";
 import Spacer from "@/components/Spacer";
+import { Link } from "expo-router"; // Import Link from expo-router for navigation. -M
 
 const POSTS_KEY = "tds200_posts";
 
@@ -79,8 +80,13 @@ export default function HomeScreen() {
     );
   }
 
+// Added a link to navigate to the CreatePostScreen using the Link component from expo-router. -M
+
   return (
     <View style={styles.container}>
+      <Link href="/createPostScreen" style={styles.createLink}> 
+        + Create post
+      </Link>
       <FlatList
         data={posts}
         keyExtractor={(item) => item.id}
@@ -104,7 +110,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f7",
+    backgroundColor: "white",
   },
   list: {
     paddingHorizontal: 16,
@@ -122,13 +128,22 @@ const styles = StyleSheet.create({
   clearButton: {
     margin: 16,
     padding: 14,
-    backgroundColor: "#FF3B30",
+    backgroundColor: "red",
     borderRadius: 10,
     alignItems: "center",
   },
   clearButtonText: {
     color: "white",
     fontSize: 14,
+    fontWeight: "600",
+  },
+
+ // Added a style for the create post link. -M
+
+  createLink: {
+    padding: 16,
+    color: "blue",
+    fontSize: 16,
     fontWeight: "600",
   },
 });
